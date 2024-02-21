@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="todo.css">
+</head>
+<style>
+     body.dark-mode {
+        background-color: black;
+        color: white}
+</style>
+<body>
+    <div class="container">
+    <button id="theme" onclick="themechanger()">click to change the theme</button>
+    <br>
+    <input type="text" id="title" placeholder="Todo title"> <br><br>
+    <input type="text" id="description" placeholder="Todo description"> <br><br>
+    <button style="background-color: cadetblue;" id="btn">Add Todo</button>
+    <div id="container"></div>
+    </div>
+    
+<script>
+    const btn = document.getElementById("btn");
+    const container = document.getElementById("container");
+    btn.addEventListener("click",()=>{
+        const tittle=document.getElementById("title").value;
+        const description=document.getElementById("description").value;
+        
+        if(tittle.trim()!==''&&description.trim()!==''){
+            const todoitem=document.createElement("div");
+            const buttonval=document.getElementById("btn").value;
+            todoitem.innerHTML=`
+                <h1>${tittle}</h1>
+                <h4>${description}</h4>
+                <button class="complete_todo">complete</button>
+                <hr>
+            `;
+            container.appendChild(todoitem);
+            document.getElementById("title").value="";
+            const values=document.getElementById("description").value="";
+            console.log(values);
+        }
+    else{
+        alert("please enter the both field");
+    }        
+
+    })
+    container.addEventListener("click",(event)=>{
+        if(event.target.classList.contains("complete_todo")){
+            const button =event.target;
+            button.textContent="Task-completed";
+            button.disabled=true;
+        }
+    })
+    function themechanger(){
+        const themebtn=document.getElementById("theme");
+     themebtn.addEventListener("click",()=>{
+        document.body.classList.toggle("dark-mode")
+     })   
+    }
+</script>
+</body>
+</html>
